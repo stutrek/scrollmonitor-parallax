@@ -8,7 +8,7 @@ npm install -S scrollmonitor-parallax
 
 ## Examples
 
-* [https://stutrek.github.io/scrollmonitor-parallax/tests]
+* [Only one right now](https://stutrek.github.io/scrollmonitor-parallax/tests/index.html)
 
 ## Basic Usage
 
