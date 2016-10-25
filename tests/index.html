@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+	<title>ScrollMonitor Parallax</title>
+	<style type="text/css">
+		#container {
+			background-color: silver;
+			height: 3000px;
+			width: 700px;
+			margin: 0 auto;
+			position: relative;
+			overflow: hidden;
+		}
+
+		#speedy {
+			position: absolute;
+			top: 10px;
+			left: 100px;
+			width: 200px;
+			height: 100px;
+			text-align: center;
+			background-color: white;
+		}
+		#custom {
+			position: absolute;
+			top: 10px;
+			left: 400px;
+			width: 200px;
+			height: 100px;
+			text-align: center;
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<h1>ScrollMonitor Parallax Test Page</h1>
+	<div id="container">
+		<div id="speedy"><i>SPEEDY!!</i></div>
+		<div id="custom"><i>Custom</i></div>		
+	</div>
+	<script src="/node_modules/scrollmonitor/scrollMonitor.js"></script>
+	<script src="/index.js"></script>
+	<script>
+		/*eslint-disable */
+		var root = parallax.create(document.getElementById('container'));
+		
+		root.add(document.getElementById('speedy'), 2);
+		
+		root.add(document.getElementById('custom'), {
+			end: {
+				y: 2880,
+				rotate: 720
+			}
+		});
+
+	</script>
+</body>
+</html>

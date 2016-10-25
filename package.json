@@ -1,0 +1,30 @@
+{
+  "name": "scrollmonitor-parallax",
+  "version": "0.0.0",
+  "description": "A simple parallax API",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "scrollmonitor": "^1.0.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stutrek/scrollmonitor-parallax.git"
+  },
+  "keywords": [
+    "scrolling",
+    "parallax"
+  ],
+  "author": "Stu Kabakoff <sakabako@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stutrek/scrollmonitor-parallax/issues"
+  },
+  "homepage": "https://github.com/stutrek/scrollmonitor-parallax#readme"
+}
