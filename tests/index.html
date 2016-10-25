@@ -21,6 +21,15 @@
 			text-align: center;
 			background-color: white;
 		}
+		#upward {
+			position: absolute;
+			top: 1000px;
+			left: 250px;
+			width: 200px;
+			height: 280px;
+			text-align: center;
+			background-color: white;
+		}
 		#custom {
 			position: absolute;
 			top: 10px;
@@ -44,6 +53,13 @@
 root.add(speedyEl, 2);	
 		</pre>
 		</div>
+
+		<div id="upward"><i>I go up!</i>
+		<pre>
+root.add(upEl, -1.5);	
+		</pre>
+		</div>
+
 		<div id="custom"><i>Props and Easing</i>
 		<pre>
 root.add(customEl, {
@@ -70,6 +86,7 @@ root.add(customEl, {
 		var root = parallax.create(document.getElementById('container'));
 		
 		root.add(document.getElementById('speedy'), 2);
+		root.add(document.getElementById('upward'), -1.5);
 		
 		root.add(document.getElementById('custom'), {
 			start: {
