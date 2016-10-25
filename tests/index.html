@@ -12,12 +12,22 @@
 			overflow: hidden;
 		}
 
+		#outside {
+			position: fixed;
+			top: 10px;
+			left: 10px;
+			width: 200px;
+			text-align: center;
+			background-color: black;
+			color: white;
+			opacity: 0;
+		}
+
 		#speedy {
 			position: absolute;
 			top: 10px;
 			left: 100px;
 			width: 200px;
-			height: 280px;
 			text-align: center;
 			background-color: white;
 		}
@@ -26,7 +36,6 @@
 			top: 1000px;
 			left: 250px;
 			width: 200px;
-			height: 280px;
 			text-align: center;
 			background-color: white;
 		}
@@ -35,7 +44,6 @@
 			top: 10px;
 			left: 400px;
 			width: 200px;
-			height: 280px;
 			text-align: center;
 			background-color: white;
 		}
@@ -79,6 +87,10 @@ root.add(customEl, {
 		</pre>
 		</div>		
 	</div>
+	<div id="outside">
+		I live outside the scroll container,
+		but that doesn't matter.
+	</div>
 	<script src="/node_modules/scrollmonitor/scrollMonitor.js"></script>
 	<script src="/index.js"></script>
 	<script>
@@ -100,6 +112,15 @@ root.add(customEl, {
 			},
 			easing: {
 				x: function (ratio) { return Math.sin(0.9 * ratio * Math.PI); }
+			}
+		});
+
+		root.add(document.getElementById('outside'), {
+			end: {
+				opacity: 1
+			},
+			easing: {
+				opacity: function (ratio) { return Math.sin(4.5 * ratio * Math.PI); }
 			}
 		});
 

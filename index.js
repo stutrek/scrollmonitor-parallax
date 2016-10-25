@@ -18,7 +18,11 @@
 		this.element.style.transform = 'translateY(' + pixels + 'px)';
 	};
 
-	function getNumber (start, end, easing, ratio) {
+	function getNumber (field, options, ratio) {
+		var easing = options.easing[field];
+		var start = options.start[field];
+		var end = options.end[field];
+
 		if (easing) {
 			ratio = easing(ratio);
 		}
@@ -46,54 +50,33 @@
 	OptionsParallax.prototype.handleScroll = function (ratio) {
 		var transformString = 'translate3D(';
 		if (this.options.end.x) {
-			transformString += getNumber(
-				this.options.start.x,
-				this.options.end.x,
-				this.options.easing.x,
-				ratio
-			) + 'px,';
+			transformString += getNumber('x', this.options, ratio) + 'px,';
 		} else {
 			transformString += '0px,';
 		}
 		if (this.options.end.y) {
-			transformString += getNumber(
-				this.options.start.y,
-				this.options.end.y,
-				this.options.easing.y,
-				ratio
-			) + 'px,';
+			transformString += getNumber('y', this.options, ratio) + 'px,';
 		} else {
 			transformString += '0px,';
 		}
 		if (this.options.end.z) {
-			transformString += getNumber(
-				this.options.start.z,
-				this.options.end.z,
-				this.options.easing.z,
-				ratio
-			) + 'px)';
+			transformString += getNumber('z', this.options, ratio) + 'px)';
 		} else {
 			transformString += '0px)';
 		}
 
 		if (this.options.end.rotate) {
-			transformString += ' rotate(' + getNumber(
-				this.options.start.rotate,
-				this.options.end.rotate,
-				this.options.easing.rotate,
-				ratio
-			) + 'deg)';
+			transformString += ' rotate(' + getNumber('rotate', this.options, ratio) + 'deg)';
 		}
 
 		if (this.options.end.scale) {
-			transformString += ' scale(' + getNumber(
-				this.options.start.scale,
-				this.options.end.scale,
-				this.options.easing.rotate,
-				ratio
-			) + ')';
+			transformString += ' scale(' + getNumber('scale', this.options, ratio) + ')';
 		}
 		this.element.style.transform = transformString;
+
+		if (this.options.end.opacity) {
+			this.element.style.opacity = getNumber('opacity', this.options, ratio);
+		}
 	};
 
 	function Root (element, offsets) {
