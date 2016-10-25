@@ -90,8 +90,18 @@ root.add(customEl, {
 	<div id="outside">
 		I live outside the scroll container,
 		but that doesn't matter.
+		<pre>
+root.add(outsideEl, {
+  end: {
+    opacity: 1
+  },
+  easing: {
+    opacity: easing
+  }
+});
+		</pre>
 	</div>
-	<script src="/node_modules/scrollmonitor/scrollMonitor.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.0.13/scrollMonitor.js"></script>
 	<script src="/index.js"></script>
 	<script>
 		/*eslint-disable */
@@ -120,7 +130,7 @@ root.add(customEl, {
 				opacity: 1
 			},
 			easing: {
-				opacity: function (ratio) { return Math.sin(4.5 * ratio * Math.PI); }
+				opacity: function (ratio) { return Math.sin(2.5 * ratio * Math.PI); }
 			}
 		});
 
