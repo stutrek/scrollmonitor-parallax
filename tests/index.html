@@ -17,7 +17,7 @@
 			top: 10px;
 			left: 100px;
 			width: 200px;
-			height: 100px;
+			height: 280px;
 			text-align: center;
 			background-color: white;
 		}
@@ -26,17 +26,42 @@
 			top: 10px;
 			left: 400px;
 			width: 200px;
-			height: 100px;
+			height: 280px;
 			text-align: center;
 			background-color: white;
+		}
+		pre {
+			text-align: left;
+			padding: 10px;
 		}
 	</style>
 </head>
 <body>
 	<h1>ScrollMonitor Parallax Test Page</h1>
 	<div id="container">
-		<div id="speedy"><i>SPEEDY!!</i></div>
-		<div id="custom"><i>Custom</i></div>		
+		<div id="speedy"><i>Speed Only</i>
+		<pre>
+root.add(speedyEl, 2);	
+		</pre>
+		</div>
+		<div id="custom"><i>Props and Easing</i>
+		<pre>
+root.add(customEl, {
+  start: {
+    scale: 1
+  },
+  end: {
+    x: -480,
+    y: 1980,
+    rotate: 360,
+    scale: 3
+  },
+  easing: {
+    x: easingMethod
+  }
+});
+		</pre>
+		</div>		
 	</div>
 	<script src="/node_modules/scrollmonitor/scrollMonitor.js"></script>
 	<script src="/index.js"></script>
@@ -47,9 +72,17 @@
 		root.add(document.getElementById('speedy'), 2);
 		
 		root.add(document.getElementById('custom'), {
+			start: {
+				scale: 1
+			},
 			end: {
-				y: 2880,
-				rotate: 720
+				x: -480,
+				y: 2380,
+				rotate: 360,
+				scale: 3
+			},
+			easing: {
+				x: function (ratio) { return Math.sin(0.9 * ratio * Math.PI); }
 			}
 		});
 

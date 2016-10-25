@@ -18,33 +18,81 @@
 		this.element.style.transform = 'translateY(' + pixels + 'px)';
 	};
 
+	function getNumber (start, end, easing, ratio) {
+		if (easing) {
+			ratio = easing(ratio);
+		}
+
+		if (!start) {
+			return end * ratio;
+		}
+
+		var difference = end - start;
+		var change = difference * ratio;
+		return start + change;
+	}
+
 	function OptionsParallax (element, options) {
 		this.options = options;
+		if (!this.options.start) {
+			this.options.start = {};
+		}
+		if (!this.options.easing) {
+			this.options.easing = {};
+		}
 		this.element = element;
 	}
 
 	OptionsParallax.prototype.handleScroll = function (ratio) {
 		var transformString = 'translate3D(';
 		if (this.options.end.x) {
-			transformString += (this.options.end.x * ratio) + 'px,';
+			transformString += getNumber(
+				this.options.start.x,
+				this.options.end.x,
+				this.options.easing.x,
+				ratio
+			) + 'px,';
 		} else {
 			transformString += '0px,';
 		}
 		if (this.options.end.y) {
-			transformString += (this.options.end.y * ratio) + 'px,';
+			transformString += getNumber(
+				this.options.start.y,
+				this.options.end.y,
+				this.options.easing.y,
+				ratio
+			) + 'px,';
 		} else {
 			transformString += '0px,';
 		}
 		if (this.options.end.z) {
-			transformString += (this.options.end.z * ratio) + 'px)';
+			transformString += getNumber(
+				this.options.start.z,
+				this.options.end.z,
+				this.options.easing.z,
+				ratio
+			) + 'px)';
 		} else {
 			transformString += '0px)';
 		}
 
 		if (this.options.end.rotate) {
-			transformString += ' rotate(' + (this.options.end.rotate * ratio) + 'deg)';
+			transformString += ' rotate(' + getNumber(
+				this.options.start.rotate,
+				this.options.end.rotate,
+				this.options.easing.rotate,
+				ratio
+			) + 'deg)';
 		}
 
+		if (this.options.end.scale) {
+			transformString += ' scale(' + getNumber(
+				this.options.start.scale,
+				this.options.end.scale,
+				this.options.easing.rotate,
+				ratio
+			) + ')';
+		}
 		this.element.style.transform = transformString;
 	};
 
