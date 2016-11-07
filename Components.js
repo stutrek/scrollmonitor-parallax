@@ -12,7 +12,7 @@ export const ParallaxRoot = (Component) => class ParallaxRoot extends React.Comp
 	componentDidMount () {
 		var el = ReactDOM.findDOMNode(this);
 		this.setState({
-			root: parallax.create(el)
+			root: parallax.create(el, this.props.parallaxOffsets)
 		});
 	}
 
@@ -25,7 +25,29 @@ export class ParallaxItem extends React.Component {
 
 	initializeParallax (parallaxRoot) {
 		var el = ReactDOM.findDOMNode(this);
-		parallaxRoot.add(el, this.props.speed);
+		if (this.props.speed) {
+			parallaxRoot.add(el, this.props.speed);
+		} else {
+			var options = {
+				start: {},
+				end: {},
+				easing: {}
+			};
+			Object.keys(this.props).forEach((prop) => {
+				var keyArray = prop.split('-');
+				var mainKey = keyArray[0];
+				var childKey = keyArray[1];
+
+				switch (mainKey) {
+					case 'start':
+					case 'end':
+					case 'easing':
+						options[mainKey] = options[mainKey] || {};
+						options[mainKey][childKey] = this.props[prop];
+				}
+			});
+			parallaxRoot.add(el, options);
+		}
 	}
 
 	componentDidMount () {
