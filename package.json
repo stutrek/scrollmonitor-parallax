@@ -1,6 +1,6 @@
 {
   "name": "scrollmonitor-parallax",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A simple parallax API",
   "main": "index.js",
   "directories": {
