@@ -70,7 +70,7 @@
 		if (this.options.end.bottom !== undefined) {
 			this.watcher = scrollMonitor.create(element);
 		} else {
-			this.wathcer = {};
+			this.watcher = {};
 		}
 		this.element = element;
 	}
