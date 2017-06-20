@@ -51,6 +51,42 @@
 			text-align: left;
 			padding: 10px;
 		}
+
+		#nested {
+			position: relative;
+			overflow-y: scroll;
+			height: 500px;
+		}
+		#nestedcontent {
+			height: 1000px;
+		}
+		#nestedupward {
+			position: absolute;
+			top: 500px;
+			left: 250px;
+			width: 200px;
+			text-align: center;
+			color: white;
+			background-color: red;
+		}
+		#nestedupwardslower {
+			position: absolute;
+			top: 500px;
+			left: 500px;
+			width: 200px;
+			text-align: center;
+			color: white;
+			background-color: blue;
+		}
+		#nestedfixed {
+			position: absolute;
+			top: 500px;
+			left: 0;
+			width: 200px;
+			text-align: center;
+			color: white;
+			background-color: green;
+		}
 	</style>
 </head>
 <body>
@@ -101,7 +137,21 @@ root.add(outsideEl, {
 });
 		</pre>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.0.13/scrollMonitor.js"></script>
+	<div id="nested">
+		<div id="nestedcontent">
+			Parallax on another scroll container
+		</div>
+		<div id="nestedfixed">
+			Where are you going?
+		</div>
+		<div id="nestedupward">
+			Onward and upward!
+		</div>
+		<div id="nestedupwardslower">
+			Hey wait!
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"></script>
 	<script src="../index.js"></script>
 	<script>
 		/*eslint-disable */
@@ -134,6 +184,10 @@ root.add(outsideEl, {
 			}
 		});
 
+		var containerMonitor = scrollMonitor.createContainer(document.getElementById('nested'));
+		var nestedroot = parallax.create(document.getElementById('nestedcontent'), null, containerMonitor);
+		nestedroot.add(document.getElementById('nestedupward'), -0.30);
+		nestedroot.add(document.getElementById('nestedupwardslower'), -0.15);
 	</script>
 </body>
 </html>

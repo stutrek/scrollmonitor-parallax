@@ -48,3 +48,17 @@ var parallaxChild = parallaxRoot.add(
 );
 
 ```
+
+## Existing ScrollMonitor
+
+If you need to create your own `ScrollMonitorContainer`, you may create a parallax root and pass an existing container as the third parameter, and scrollmonitor-parallax will use that instead of using the default `ScrollMonitorContainer` instance:
+
+```javascript
+var scrollMonitor = require('scrollmonitor');
+var parallax = require('scrollmonitor-parallax');
+
+var container = scrollMonitor.createContainer(document.body);
+// Any other watching logic here.
+var parallaxRoot = parallax.create(domElement, null, container);
+// Any elements you wish to add to your parallax.
+```
