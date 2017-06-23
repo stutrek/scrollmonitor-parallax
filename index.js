@@ -58,7 +58,8 @@
 		return getNumber(easing, start, end, ratio);
 	}
 
-	function OptionsParallax (element, options) {
+	function OptionsParallax (element, options, container) {
+		container = container || scrollMonitor;
 		this.options = options;
 		if (!this.options.start) {
 			this.options.start = {};
@@ -68,7 +69,7 @@
 		}
 
 		if (this.options.end.bottom !== undefined) {
-			this.watcher = scrollMonitor.create(element);
+			this.watcher = container.create(element);
 		} else {
 			this.watcher = {};
 		}
@@ -108,20 +109,22 @@
 		}
 	};
 
-	function Root (element, offsets) {
-		this.watcher = scrollMonitor.create(element, offsets);
+	function Root (element, offsets, container) {
+		this.container = container || scrollMonitor;
+		this.watcher = this.container.create(element, offsets);
 		this.items = [];
 
 		this.pxThru = 0;
 		this.ratio = 0;
 
 		var self = this;
+		var scrollContainer = this.container.item === document.body ? window : this.container.item;
 
 		function handleScroll () {
-			var start = Math.max(0, self.watcher.top - scrollMonitor.viewportHeight);
-			var end = Math.min(self.watcher.bottom, scrollMonitor.documentHeight - scrollMonitor.viewportHeight);
+			var start = Math.max(0, self.watcher.top - self.container.viewportHeight);
+			var end = Math.min(self.watcher.bottom, self.container.documentHeight - self.container.viewportHeight);
 
-			self.pxThru = Math.max(0, scrollMonitor.viewportTop - start);
+			self.pxThru = Math.max(0, self.container.viewportTop - start);
 			self.ratio = self.pxThru / (end - start);
 
 			for (var i=0; i < self.items.length; i++) {
@@ -130,10 +133,10 @@
 		}
 
 		this.watcher.enterViewport(function () {
-			window.addEventListener('scroll', handleScroll);
+			scrollContainer.addEventListener('scroll', handleScroll);
 		});
 		this.watcher.exitViewport(function () {
-			window.removeEventListener('scroll', handleScroll);
+			scrollContainer.removeEventListener('scroll', handleScroll);
 		});
 	}
 
@@ -142,15 +145,15 @@
 		if (typeof optionsOrSpeed === 'number') {
 			newItem = new SpeedParallax(element, optionsOrSpeed);
 		} else {
-			newItem = new OptionsParallax(element, optionsOrSpeed);
+			newItem = new OptionsParallax(element, optionsOrSpeed, this.container);
 		}
 
 		this.items.push(newItem);
 	};
 
 	return {
-		create: function (item, offsets) {
-			return new Root(item, offsets);
+		create: function (item, offsets, container) {
+			return new Root(item, offsets, container);
 		}
 	};
 });
