@@ -10,15 +10,15 @@
     "scrollmonitor": "^1.0.13"
   },
   "devDependencies": {
-    "babel-core": "^6.18.0",
-    "babel-loader": "^6.2.6",
-    "babel-plugin-transform-object-assign": "^6.8.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.16.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./src/Components.js -o ./Components.js --source-maps"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,13 @@
     "scrolling",
     "parallax"
   ],
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
   "author": "Stu Kabakoff <sakabako@gmail.com>",
   "license": "MIT",
   "bugs": {
