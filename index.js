@@ -161,6 +161,13 @@
 
 		this.items.push(newItem);
 	};
+	
+	Root.prototype.destroy = function () {
+		if (this.watcher) {
+			this.items = []
+			this.watcher.destroy()
+		}
+	}
 
 	return {
 		create: function (item, offsets, container) {
