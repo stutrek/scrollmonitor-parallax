@@ -58,6 +58,15 @@
 		return getNumber(easing, start, end, ratio);
 	}
 
+	function CallbackParallax (element, callback) {
+		this.element = element;
+		this.callback = callback;
+	}
+	
+	CallbackParallax.prototype.handleScroll = function (ratio, distance, watcher) {
+		this.callback(ratio, distance, watcher)
+	};
+	
 	function OptionsParallax (element, options, container) {
 		container = container || scrollMonitor;
 		this.options = options;
@@ -144,12 +153,21 @@
 		var newItem;
 		if (typeof optionsOrSpeed === 'number') {
 			newItem = new SpeedParallax(element, optionsOrSpeed);
+		} else if (typeof optionsOrSpeed === 'function') {
+			newItem = new CallbackParallax(element, optionsOrSpeed);
 		} else {
 			newItem = new OptionsParallax(element, optionsOrSpeed, this.container);
 		}
 
 		this.items.push(newItem);
 	};
+	
+	Root.prototype.destroy = function () {
+		if (this.watcher) {
+			this.items = []
+			this.watcher.destroy()
+		}
+	}
 
 	return {
 		create: function (item, offsets, container) {
