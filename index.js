@@ -63,8 +63,8 @@
 		this.callback = callback;
 	}
 	
-	CallbackParallax.prototype.handleScroll = function (ratio, distance) {
-		this.callback(ratio, distance)
+	CallbackParallax.prototype.handleScroll = function (ratio, distance, watcher) {
+		this.callback(ratio, distance, watcher)
 	};
 	
 	function OptionsParallax (element, options, container) {
